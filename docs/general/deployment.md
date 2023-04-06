@@ -77,7 +77,7 @@ _NOTE_ that this has been tested on both APACHE and NGINX servers.
 
 ## AWS Elastic Beanstalk
 
-Please refer to to issue [#2566](https://github.com/react-boilerplate/react-boilerplate/issues/2566) for more explanation.
+Please refer to to issue [#2566](https://github.com/SFBU-SPM/Client-Portal/issues/2566) for more explanation.
 
 ### Pre-requisites
 
@@ -96,7 +96,7 @@ _Step 1:_ Add AWS EB start scripts in _package.json_: `"aws-eb:prod": "npm run b
 _Step 2:_ Create a `.ebextensions/aws.config` file:
 
 ```yaml
-# Check https://github.com/react-boilerplate/react-boilerplate/issues/2566 for details
+# Check https://github.com/SFBU-SPM/Client-Portal/issues/2566 for details
 option_settings:
   aws:elasticbeanstalk:container:nodejs:
     NodeCommand: 'npm run aws-eb:prod'
@@ -110,7 +110,7 @@ manually configure it per environment in the web console: _Configuration > Softw
 _Step 3:_ Create a `.npmrc` file:
 
 ```
-# Check https://github.com/react-boilerplate/react-boilerplate/issues/2566 for details
+# Check https://github.com/SFBU-SPM/Client-Portal/issues/2566 for details
 unsafe-perm=true
 ```
 

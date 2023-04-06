@@ -1,16 +1,16 @@
 {
-  "name": "react-boilerplate",
+  "name": "client-portal",
   "version": "4.0.0",
   "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "git://github.com/SFBU-SPM/Client-Portal"
   },
   "engines": {
     "npm": ">=5",
     "node": ">=8.15.1"
   },
-  "author": "Max Stoiber",
+  "author": "Habeeb Ahmed",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
@@ -26,6 +26,7 @@
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
     "start:production": "npm run test && npm run build && npm run start:prod",
     "start:prod": "cross-env NODE_ENV=production node server",
+    "docker:dev": "docker-compose -f docker-compose.dev.yml up",
     "presetup": "npm i chalk shelljs",
     "setup": "node ./internals/scripts/setup.js",
     "clean": "shjs ./internals/scripts/clean.js",

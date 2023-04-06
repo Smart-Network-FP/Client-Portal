@@ -37,7 +37,7 @@ Confirm/adjust eslint-config-airbnb compatible [dependency versions](https://www
 
 ### Pinned Version Numbers
 
-`react-boilerplate` does not use "^", "~", etc., and these should be removed from `package.json`, if present. See [#598](https://github.com/react-boilerplate/react-boilerplate/issues/598) for more details.
+`react-boilerplate` does not use "^", "~", etc., and these should be removed from `package.json`, if present. See [#598](https://github.com/SFBU-SPM/Client-Portal/issues/598) for more details.
 
 At this point, you should copy and paste the version diff from the terminal into your `Update Log`.
 
