@@ -38,7 +38,7 @@ You can then set breakpoints directly from inside VS Code, use stepping with the
 
 Read all about it in the [Debugger for Chrome page](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome).
 
-**Note**: There's currently a [known problem](https://github.com/react-boilerplate/react-boilerplate/pull/1698) with source maps and VS Code. You can change your Webpack dev config to use `inline-source-map` instead of `eval-source-map` and the issue should be resolved.
+**Note**: There's currently a [known problem](https://github.com/SFBU-SPM/Client-Portal/pull/1698) with source maps and VS Code. You can change your Webpack dev config to use `inline-source-map` instead of `eval-source-map` and the issue should be resolved.
 
 ## Debugging with WebStorm
 
@@ -46,7 +46,7 @@ WebStorm is a powerful IDE, and why not also use it as debugger tool? Here are t
 
 1.  [Install JetBrain Chrome Extension](https://chrome.google.com/webstore/detail/jetbrains-ide-support/hmhgeddbohgjknpmjagkdomcpobmllji)
 2.  [Setting up the PORT](https://www.jetbrains.com/help/webstorm/2016.1/using-jetbrains-chrome-extension.html)
-3.  Change WebPack devtool config to `source-map` [(This line)](https://github.com/react-boilerplate/react-boilerplate/blob/56eb5a0ec4aa691169ef427f3a0122fde5a5aa24/internals/webpack/webpack.dev.babel.js#L65)
+3.  Change WebPack devtool config to `source-map` [(This line)](https://github.com/SFBU-SPM/Client-Portal/blob/56eb5a0ec4aa691169ef427f3a0122fde5a5aa24/internals/webpack/webpack.dev.babel.js#L65)
 4.  Run web server (`npm run start`)
 5.  Create Run Configuration (Run > Edit Configurations)
 6.  Add new `JavaScript Debug`
