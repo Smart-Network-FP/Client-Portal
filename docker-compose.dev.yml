@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  client-portal-dev:
+    container_name: client-portal-dev
+    image: client-portal-dev
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./app:/app/app
+      - ./server:/app/server
+    networks:
+      - profileservice_node-network
+    ports:
+      - 9000:3000
+
+networks:
+  profileservice_node-network:
+    external: true
