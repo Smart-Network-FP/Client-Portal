@@ -14,8 +14,48 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
+// parse json request body
+app.use(express.json());
+
+// parse urlencoded request body
+app.use(express.urlencoded({ extended: true }));
+
+const axios = require('axios');
+
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+
+app.post('/api/login', async (req, res) => {
+  console.log('Body', req.body);
+  console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/auth/login`);
+  const response = await axios.post(
+    `http://${process.env.PROFILE_SERVICE}:3000/v1/auth/login`,
+    req.body,
+  );
+  console.log('Body2', response.data);
+  if (response) {
+    res.send(response.data);
+  } else {
+    res.send({});
+  }
+  console.log('Body 3', response.data);
+});
+
+app.post('/api/signup', async (req, res) => {
+  console.log('Body', req.body);
+  console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/auth/login`);
+  const response = await axios.post(
+    `http://${process.env.PROFILE_SERVICE}:3000/v1/auth/register`,
+    req.body,
+  );
+  console.log('Body2', response.data);
+  if (response) {
+    res.send(response.data);
+  } else {
+    res.send({});
+  }
+  console.log('Body 3', response.data);
+});
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

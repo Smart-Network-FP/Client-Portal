@@ -11,10 +11,10 @@ services:
       - ./app:/app/app
       - ./server:/app/server
     networks:
-      - profileservice_node-network
+      - node-network
     ports:
       - 9000:3000
 
 networks:
-  profileservice_node-network:
+  node-network:
     external: true
