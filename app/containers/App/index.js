@@ -24,7 +24,7 @@ export default function App() {
         <Switch>
           <Route path="/" exact component={AuthPage} />
           <Route path="/home" component={HomePage} />
-          <Route path="/profile" component={ProfilePage} />
+          <Route path="/profile/:id" component={ProfilePage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Router>

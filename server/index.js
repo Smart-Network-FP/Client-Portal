@@ -43,10 +43,33 @@ app.post('/api/login', async (req, res) => {
 
 app.post('/api/signup', async (req, res) => {
   console.log('Body', req.body);
-  console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/auth/login`);
+  console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/auth/register`);
   const response = await axios.post(
     `http://${process.env.PROFILE_SERVICE}:3000/v1/auth/register`,
     req.body,
+  );
+  console.log('Body2', response.data);
+  if (response) {
+    res.send(response.data);
+  } else {
+    res.send({});
+  }
+  console.log('Body 3', response.data);
+});
+
+app.post('/api/search', async (req, res) => {
+  console.log('Body', req.body);
+  const { query, token } = req.body;
+  console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/experts/query`);
+  const response = await axios.post(
+    `http://${process.env.PROFILE_SERVICE}:3000/v1/experts/query`,
+    query,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    },
   );
   console.log('Body2', response.data);
   if (response) {
