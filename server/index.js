@@ -80,6 +80,34 @@ app.post('/api/search', async (req, res) => {
   console.log('Body 3', response.data);
 });
 
+app.post('/api/getExpertById', async (req, res) => {
+  console.log('Body', req.body);
+  const { expertId, token } = req.body;
+  console.log(
+    `-----> ${
+      process.env.PROFILE_SERVICE
+    }/v1/experts/profileById?expertId=${expertId}`,
+  );
+  const response = await axios.get(
+    `http://${
+      process.env.PROFILE_SERVICE
+    }:3000/v1/experts/profileById?expertId=${expertId}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  console.log('Body2', response.data);
+  if (response) {
+    res.send(response.data);
+  } else {
+    res.send({});
+  }
+  console.log('Body 3', response.data);
+});
+
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
