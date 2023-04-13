@@ -8,9 +8,11 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
+import AuthPage from 'containers/AuthPage/Loadable';
+import ProfilePage from 'containers/ProfilePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -18,10 +20,14 @@ import GlobalStyle from '../../global-styles';
 export default function App() {
   return (
     <div>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={AuthPage} />
+          <Route path="/home" component={HomePage} />
+          <Route path="/profile" component={ProfilePage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Router>
       <GlobalStyle />
     </div>
   );
