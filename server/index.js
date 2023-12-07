@@ -29,7 +29,7 @@ app.post('/api/login', async (req, res) => {
   console.log('Body', req.body);
   console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/auth/login`);
   const response = await axios.post(
-    `http://${process.env.PROFILE_SERVICE}:3000/v1/auth/login`,
+    `http://${process.env.PROFILE_SERVICE}:9000/v1/auth/login`,
     req.body,
   );
   console.log('Body2', response.data);
@@ -45,7 +45,7 @@ app.post('/api/signup', async (req, res) => {
   console.log('Body', req.body);
   console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/auth/register`);
   const response = await axios.post(
-    `http://${process.env.PROFILE_SERVICE}:3000/v1/auth/register`,
+    `http://${process.env.PROFILE_SERVICE}:9000/v1/auth/register`,
     req.body,
   );
   console.log('Body2', response.data);
@@ -62,7 +62,7 @@ app.post('/api/search', async (req, res) => {
   const { query, token } = req.body;
   console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/experts/query`);
   const response = await axios.post(
-    `http://${process.env.PROFILE_SERVICE}:3000/v1/experts/query`,
+    `http://${process.env.PROFILE_SERVICE}:9000/v1/experts/query`,
     query,
     {
       headers: {
@@ -91,7 +91,32 @@ app.post('/api/getExpertById', async (req, res) => {
   const response = await axios.get(
     `http://${
       process.env.PROFILE_SERVICE
-    }:3000/v1/experts/profileById?expertId=${expertId}`,
+    }:9000/v1/experts/profileById?expertId=${expertId}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  console.log('Body2', response.data);
+  if (response) {
+    res.send(response.data);
+  } else {
+    res.send({});
+  }
+  console.log('Body 3', response.data);
+});
+
+app.post('/api/search', async (req, res) => {
+  console.log('Body', req.body);
+  const { token, queryString } = req.body;
+  console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/gpt/prompt`);
+  const response = await axios.post(
+    `http://${process.env.PROFILE_SERVICE}:9000/v1/gpt/prompt`,
+    {
+      message: queryString,
+    },
     {
       headers: {
         'Content-Type': 'application/json',
@@ -114,7 +139,7 @@ setup(app, {
   publicPath: '/',
 });
 
-// get the intended host and port number, use localhost and port 3000 if not provided
+// get the intended host and port number, use localhost and port 9000 if not provided
 const customHost = argv.host || process.env.HOST;
 const host = customHost || null; // Let http.Server use its default IPv6/4 host
 const prettyHost = customHost || 'localhost';

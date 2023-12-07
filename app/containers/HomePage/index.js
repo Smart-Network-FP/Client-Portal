@@ -16,7 +16,7 @@ import Loading from 'components/Loading';
 import axios from 'axios';
 import { getToken } from 'utils/authHelper';
 import messages from './messages';
-import { debounce } from 'lodash';
+import { debounce, get } from 'lodash';
 
 const { Search } = Input;
 
@@ -36,7 +36,8 @@ function HomePage({ history }) {
   const [experts, setExperts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = value => {
+  const handleSearch = event => {
+    const value = get(event, 'target.value');
     setSearchTerm(value);
     setQuery(state => ({ ...state, keyword: value }));
   };
@@ -88,7 +89,8 @@ function HomePage({ history }) {
                   placeholder="Search"
                   enterButton
                   style={{ marginBottom: '1rem' }}
-                  onSearch={debouncedHandleSearch}
+                  // onSearch={debouncedHandleSearch}
+                  onChange={debouncedHandleSearch}
                 />
               </Col>
             </Row>

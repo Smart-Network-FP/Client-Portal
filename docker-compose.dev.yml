@@ -13,7 +13,7 @@ services:
     networks:
       - node-network
     ports:
-      - 9000:3000
+      - 8080:3000
 
 networks:
   node-network:
