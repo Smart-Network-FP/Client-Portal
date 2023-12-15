@@ -15,17 +15,20 @@ import TopNav from 'components/TopNav';
 import Loading from 'components/Loading';
 import axios from 'axios';
 import { getToken } from 'utils/authHelper';
-import messages from './messages';
 import { debounce, get } from 'lodash';
+import messages from './messages';
 
 const { Search } = Input;
 
 function HomePage({ history }) {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState({
-    keyword: '',
+    searchText: '',
     filter: {
-      emailFilter: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      industry: '',
     },
     options: {
       sortBy: 'asc',
@@ -37,9 +40,10 @@ function HomePage({ history }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = event => {
+    debugger;
     const value = get(event, 'target.value');
     setSearchTerm(value);
-    setQuery(state => ({ ...state, keyword: value }));
+    setQuery(state => ({ ...state, searchText: value }));
   };
   const debouncedHandleSearch = debounce(handleSearch, 500);
 
@@ -49,7 +53,7 @@ function HomePage({ history }) {
     // Simulate an async data loading operation
     const loadData = async () => {
       const res = await axios.post('/api/search', { query, token });
-      setExperts(res.data.results);
+      setExperts(res.data);
       debugger;
       setLoading(false);
     };
@@ -59,7 +63,7 @@ function HomePage({ history }) {
   useEffect(() => {
     const loadData = async (query, token) => {
       const res = await axios.post('/api/search', { query, token });
-      setExperts(res.data.results);
+      setExperts(res.data);
       debugger;
       setLoading(false);
     };
@@ -96,6 +100,9 @@ function HomePage({ history }) {
             </Row>
             {/* Add your filter component here */}
             <Row gutter={[16, 16]}>
+              <Row style={{ marginLeft: '5px' }}>
+                <h1>Total Count: {experts.length}</h1>
+              </Row>
               {experts.map(({ id, firstName, lastName, industry }, index) => (
                 <Col xs={24} sm={24} md={24} lg={24} key={id}>
                   <Card

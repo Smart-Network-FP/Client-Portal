@@ -57,7 +57,7 @@ app.post('/api/signup', async (req, res) => {
   console.log('Body 3', response.data);
 });
 
-app.post('/api/search', async (req, res) => {
+app.post('/api/expertsearch', async (req, res) => {
   console.log('Body', req.body);
   const { query, token } = req.body;
   console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/experts/query`);
@@ -108,7 +108,7 @@ app.post('/api/getExpertById', async (req, res) => {
   console.log('Body 3', response.data);
 });
 
-app.post('/api/search', async (req, res) => {
+app.post('/api/prompt', async (req, res) => {
   console.log('Body', req.body);
   const { token, queryString } = req.body;
   console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/gpt/prompt`);
@@ -116,6 +116,33 @@ app.post('/api/search', async (req, res) => {
     `http://${process.env.PROFILE_SERVICE}:9000/v1/gpt/prompt`,
     {
       message: queryString,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+  console.log('Body2', response.data);
+  if (response) {
+    res.send(response.data);
+  } else {
+    res.send({});
+  }
+  console.log('Body 3', response.data);
+});
+
+// Elastic Search Endpoints
+// Search
+app.post('/api/search', async (req, res) => {
+  console.log('Body', req.body);
+  const { query, token } = req.body;
+  console.log(`-----> ${process.env.PROFILE_SERVICE}/v1/elastic-search/search`);
+  const response = await axios.post(
+    `http://${process.env.PROFILE_SERVICE}:9000/v1/elastic-search/search`,
+    {
+      query,
     },
     {
       headers: {
